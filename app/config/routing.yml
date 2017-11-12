@@ -1,0 +1,3 @@
+louvre_billet:
+    resource: "@LouvreBilletBundle/Resources/config/routing.yml"
+    prefix:   /

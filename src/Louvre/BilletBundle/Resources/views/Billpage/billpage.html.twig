@@ -1,0 +1,63 @@
+{% extends "LouvreBilletBundle::layout.html.twig" %}
+
+{% block css %}
+  
+  <link href="{{ asset('css/stylesheetBillpage.css')}}" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}
+
+  Musée du Louvre - Paiement
+
+{% endblock %}
+
+{% block header_content %}
+  
+  <h1>Paiement</h1>
+
+{% endblock %}
+
+{% block header_on_small %}
+  
+  <h2> Paiement </h2>
+
+{% endblock %}
+
+{% block main_content %}
+  
+<section id="user_form" class="billpage container valign-center">
+      
+      <h3 class="hide-on-med-and-down">RÉCAPITULATIF</h3>
+      <h4 class="hide-on-large-only">RÉCAPITULATIF</h4>
+
+      <div class="col s12 center-align">
+        <h5>Votre réservation à bien été validée! </h5><br>
+      </div>
+      <div class="col s12 left-align">
+        Vous allez recevoir un mail contenant les billets à l'adresse {{ shoppingCart.userId.email }} ainsi qu'une facture. Vous devrez présenter les billets à l'entrée du musée, sur papier ou sur smartphone. En cas de tarif réduit, un justificatif pourra vous être demandé. <br><br>
+      </div>
+      <div class="col s12 left-align">
+        Le musée du Louvre vous remercie pour votre commande et vous souhaite une agréable visite! <br><br>
+      </div>
+      <div class="col s12 center-align">
+        <a href="{{path('louvre_billet_homepage') }}" class="waves-effect waves-light btn">RETOUR A L'ACCUEIL</a>
+      </div>
+
+        
+
+    </section>
+
+{% endblock %}
+
+{% block footer_content %}
+  
+  
+
+{% endblock %}
+
+{% block js %}
+  
+  
+
+{% endblock %}

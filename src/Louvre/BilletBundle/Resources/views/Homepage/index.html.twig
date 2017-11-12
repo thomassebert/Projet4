@@ -1,0 +1,132 @@
+{% extends "LouvreBilletBundle::layout.html.twig" %}
+
+{% block css %}
+  
+  <link href="{{ asset('css/stylesheetIndex.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}
+
+  Musée du Louvre - Billetterie
+
+{% endblock %}
+
+{% block header %}
+
+  <div class="carousel carousel-slider center" data-indicators="true">
+    <div class="carousel-item white-text" href="#one!">
+      <img src="{{ asset('assets/images/carrousel1.jpg')}}" class="sliderImg" width="100%" height="100%" alt="facebook icon">
+    </div>
+    <div class="carousel-item white-text" href="#two!">
+      <img src="{{ asset('assets/images/carrousel2.jpg')}}" class="sliderImg" width="100%" height="100%" alt="facebook icon">
+    </div>
+    <div class="carousel-item white-text" href="#three!">
+      <img src="{{ asset('assets/images/carrousel3.jpg')}}" class="sliderImg" width="100%" height="100%" alt="facebook icon">
+    </div>
+    <div class="carousel-item white-text" href="#four!">
+      <img src="{{ asset('assets/images/carrousel4.jpg')}}" class="sliderImg" width="100%" height="100%" alt="facebook icon">
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block main_content %}
+  
+   <section id="user_form" class="container">
+      
+      <h3 class="hide-on-med-and-down">RÉSERVEZ VOS BILLETS</h3>
+      <h4 class="hide-on-large-only">RÉSERVEZ VOS BILLETS</h4>
+
+        {{ form_start(form, {'method': 'POST'}) }}
+          <div class="row form">
+
+            <div class="input-field col s12">
+              <span class="error">{{ form_errors(form.email) }}</span>
+              {{ form_widget(form.email, { 'attr':  {
+                'class' : 'validate'
+              }}) }}
+              <label for="form[email]">Votre email</label>
+            </div>
+
+            <div class="input-field col s12">
+              <span class="error">{{ form_errors(form.fullname) }}</span>
+              {{ form_widget(form.fullname, { 'attr':  {
+                'class' : 'validate'
+              }}) }}
+              <label for="form[fullname]">Votre nom complet</label>
+            </div>
+
+            <div class="input-field col s12">
+              <span class="error">{{ form_errors(form.age) }}</span>
+              {{ form_widget(form.age, { 'attr':  {
+                'class' : 'validate'
+              }}) }}
+              <label for="form[age]">Votre age</label>
+            </div>
+
+            <button class="btn waves-effect waves-light col s7 offset-s5 m5 offset-m7 l4 offset-l8 grey darken-3" type="submit" >Choisir vos billets<i class="material-icons right">send</i></button>
+
+          </div>
+        {{ form_end(form) }} 
+
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="pricing" class="container">
+      
+        <h3 class="hide-on-med-and-down">TARIFS</h3>
+        <h4 class="hide-on-large-only">TARIFS</h4>
+
+        <article class="table row col s10 offset-s1 m8 offset-m2 l6 offset-l3">
+          
+            <div class="line valign-wrapper titles col s12">
+              <div class="col s6 left-align">Type de billet</div>
+              <div class="col s3 center-align">Journée</div>
+              <div class="col s3 center-align">Demi-journée</div>
+            </div>
+
+            <div class="line valign-wrapper col s12">
+              <div class="col s6 left-align">Normal (12 ans et plus)</div>
+              <div class="col s3 center-align">16€</div>
+              <div class="col s3 center-align">8€</div>
+            </div>
+
+            <div class="line valign-wrapper col s12">
+              <div class="col s6 left-align">Enfant (4 à 12 ans)</div>
+              <div class="col s3 center-align">8€</div>
+              <div class="col s3 center-align">4€</div>
+            </div>
+
+            <div class="line valign-wrapper col s12">
+              <div class="col s6 left-align">Senior (60 ans et plus)</div>
+              <div class="col s3 center-align">12€</div>
+              <div class="col s3 center-align">6€</div>
+            </div>
+
+            <div class="line valign-wrapper col s12">
+              <div class="col s6 left-align">Réduit *</div>
+              <div class="col s3 center-align">10€</div>
+              <div class="col s3 center-align">5€</div>
+            </div>
+
+        </article>
+
+        <div class="col s12 center-align"> * Tarif réduit accordé sous conditions (étudiant, employé du musée, d’un service du Ministère de la Culture, militaire, invalide, ...). Un justificatif pourra vous être demandé à l'entrée.</div>
+
+    </section>
+
+{% endblock %}
+
+{% block footer_content %}
+  
+  
+
+{% endblock %}
+
+{% block js %}
+  
+  <script type="text/javascript" src="{{ asset('js/homepage.js')}}"></script>
+
+{% endblock %}

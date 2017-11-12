@@ -1,0 +1,80 @@
+#bandeau_image {
+	background-image: url("/assets/images/louvre_nuit_2.jpg");
+}
+
+.ticketFormPart {
+ 	padding-top: 35px;
+ 	padding-bottom: 35px;
+}
+
+.buttonPadding {
+ 	padding-left: 15px;
+}
+
+ main {
+ 	padding-top: 30px;
+}
+
+.shoppingCartCard > .card-content {
+ 	height: 80%;
+}
+
+.iconPadding {
+	margin-top: 5px;
+}
+
+.iconPaddingBis {
+	margin-top: 4px;
+	margin-left: 8px;
+}
+
+.shoppingCartPart .card-action {
+	display: none; 
+}
+
+.calendarPartSubmit {
+	margin-top: 25px;
+}
+
+.calendarChoiceDetails {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	font-size: 1.3em;
+}
+
+.calendarChoiceDetails div {
+	margin-right: 10px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.ticketsNumber {
+	margin-top: 25px;
+}
+
+@media screen and (max-width: 800px) {
+
+	.ticketsNumber {
+		margin-top: 10px !important;
+		margin-bottom: 10px !important;
+	}
+}
+
+.paymentSubmit {
+	margin-bottom: 15px;
+}
+
+.recapContent {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.total {
+	font-size: 1.2em;
+}
+

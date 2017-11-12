@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<!-- HEAD -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="Content-Type" content="UTF-8">
+        
+     <!-- TITLE -->
+        <title> Billets </title>
+     <!-- CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Libre+Barcode+39|Rozha+One" rel="stylesheet">
+
+     </head>
+
+    <body class="row">
+        
+        {% for booking in bookings %}  
+            <section class="col s12 mainColor white-text">
+                <div class="logoBar col s5 mainColor center-align">
+                    <img class="mainLogo" src="{{ absolute_url(asset('assets/images/logo.png')) }}" alt="Logo du musée">
+                </div>
+                <div class="barcode col s7">
+                    <span class="barcode-style">{{ datas.bookingKey }}</span>
+                </div>
+                
+                <div class="name col s5 ">
+                    {{ booking.name}} {{ booking.firstname}}
+                </div>
+                <div class="col s5 offset-s2">
+                    {{ booking.ticketPrice}} €
+                </div>
+            
+            
+                <div class="col s5 ">
+                    Date de visite: {{ booking.calendarId.day|date('d/m/Y') }} 
+                </div>
+                <div class="col s5 offset-s2">
+                    Type de billet: {{ booking.bookingType}} 
+                </div>
+            
+            
+                <div class="col s5 ">
+                    Date de naissance: {{ booking.birthDate|date('d/m/Y') }} 
+                </div>
+                <div class="col s5 offset-s2">
+                    Pays: {{ booking.country}} 
+                </div>
+            
+            
+                <div class="col s5 ">
+                    Tarif réduit: {{ booking.discountTicket ? 'OUI' : 'NON' }} 
+                </div>
+                <div class="col s5 offset-s2">
+                    Code de réservation:  {{ datas.bookingKey }}
+                </div>
+
+                
+                
+            </section>  
+
+            <div class="col s8 offset-s2">
+                <div class="divider"></div>
+            </div>
+
+        {% endfor %}
+    
+
+        <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+        {% block js %}{% endblock %}
+
+     </body>
+
+     <style type="text/css">
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            width: 90vw;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+          }
+
+        main {
+            flex: 1 0 auto;
+          }
+
+        .logoBar {
+            width: 100vw;
+            height: 150px;
+            padding-top: 20px; 
+        }
+
+        @media screen and (max-width: 800px) {
+
+            .logoBar {
+                height: 100px;
+                padding-top: 10px; 
+            }
+
+            .mainLogo {
+                height: 80px;
+            }
+        }
+
+        .mainColor {
+            background-color: rgb(100, 100, 100);
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            min-height: 400px;
+
+        }
+
+        .museumMap {
+            margin-top: 20px;
+            margin-top: 20px;
+        }
+
+        .socialIcons {
+            margin-top: 30px;
+        }
+
+        section {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            font-size: 21px;
+            font-family: 'Rozha One', serif;
+        }
+
+        .divider {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .name {
+            margin-left: 95px;
+        }
+
+        .barcode {
+            font-family: 'Libre Barcode 39', cursive;
+            font-size: 80px;
+            text-align: center;
+            margin-top: 10px;
+            height: 150px;
+        }
+
+        .barcode-style {
+            padding: 5px;
+            width: 500px;
+            color: black;
+        }
+
+     </style>
+
+ </html>

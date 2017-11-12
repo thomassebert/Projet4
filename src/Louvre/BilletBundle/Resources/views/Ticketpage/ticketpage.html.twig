@@ -1,0 +1,180 @@
+{% extends "LouvreBilletBundle::layout.html.twig" %}
+
+{% block css %}
+  
+  <link href="{{ asset('css/stylesheetTicket.css')}}" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}
+
+  Choix des billets
+
+{% endblock %}
+
+{% block header_content %}
+  
+  <h1>Choix des billets</h1>
+
+{% endblock %}
+
+{% block header_on_small %}
+  
+  <h2>  </h2>
+
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block _booking_tickets_entry_widget %}
+
+<div class="row ticketFormContainer" number="__change__">
+  <div class="col s12">
+    <div class="card hoverable white">
+      <div class="card-content row ticketFormPart booking_tickets__change__">
+
+        <span class="card-title"><strong>Billet <span class="ticketNumber">__changeTitle__</span> </strong><span class="ticketPrice center"></span><span class="ticketFormState right waves-effect waves-light yellow darken-2 btn"><i class="material-icons left">report</i> A compléter</span> </span> 
+        <div class="divider"></div>
+        
+        <div class="ticketFormContent">
+           <div class="input-field col s12 m5">
+               <span class="error"> {{ form_errors(form.name) }} </span>
+               {{ form_widget(form.name) }} 
+               {{ form_label(form.name) }} 
+           </div>
+           <div  class="input-field col s12 m5 offset-m2">
+               <span class="error"> {{ form_errors(form.firstname) }} </span>
+               {{ form_widget(form.firstname) }} 
+               {{ form_label(form.firstname) }} 
+           </div>
+           <div  class="input-field col s12 m5">
+               <span class="error"> {{ form_errors(form.country) }} </span>
+               {{ form_widget(form.country) }}
+               {{ form_label(form.country) }}  
+           </div>
+           <div  class="input-field col s12 m5 offset-m2">
+               <span class="error"> {{ form_errors(form.birthDate) }} </span>
+               {{ form_widget(form.birthDate) }}
+               {{ form_label(form.birthDate) }}  
+           </div>
+           <div  class="input-field col s6 valign-wrapper">
+               <span class="error"> {{ form_errors(form.discountTicket) }} </span>
+               {{ form_widget(form.discountTicket) }}
+               {{ form_label(form.discountTicket) }} 
+           </div>
+           <div class="col s6 right-align"> <a class="btn-floating waves-effect waves-light red tooltipped ticketformDelete" data-position="left" data-delay="50" data-tooltip="Supprimer"><i class="material-icons">delete</i></a> </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block main_content %}
+  
+   <section id="ticket_form" class="container">
+    <div class="row">
+      <div class="container formPart col s12 m9">
+
+        {{ form_start(form, {'method': 'POST'}) }}
+
+        <div class="row">
+          <div class="col s12">
+            <div class="card hoverable white calendarValid">
+              <div class="card-content calendarForm">
+
+                <span class="card-title"> <a class="btn-floating waves-effect waves-light blue"><i class="iconPadding  material-icons">today</i></a> Choisissez la date de votre visite</span> 
+
+                <div class="row form">
+                  
+                  <div class="input-field visitDateInput col s12 l7 ">
+                    <span class="error"> {{ form_errors(form.calendar.day) }} </span>
+                    {{ form_widget(form.calendar.day, { 'attr':  {
+                      'class' : 'datepicker'
+                    }}) }}
+                    <label for="form[calendar.day]">Date de la visite</label>
+                  </div>
+
+                  <div class="input-field bookingType col s12 l7">
+                    <span class="error"> {{ form_errors(form.calendar.bookingType) }} </span>
+                    {{ form_widget(form.calendar.bookingType, { 'attr':  {
+                      'class' : 'validate'
+                    }}) }}
+                    <label for="form[calendar.bookingType]">Type de billet</label>
+                  </div> 
+                
+                {{ form_row(form.calendar.save, { 'label': 'Valider' ,
+                          'attr': {'class': 'btn waves-effect waves-light green col s6 offset-s3 m6 offset-m1 l4 offset-l1 calendarPartSubmit'} }) }}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+          
+
+          <div class="row form ticketForms">
+            <div class="col s12 ticketsContainer" data-prototype="{{ form_widget(form.tickets.vars.prototype)|e('html_attr') }}">
+              {{ form_widget(form.tickets) }}
+            </div>
+          </div>
+
+
+      </div>
+
+      <div class="container shoppingCartPart col s12 m3">
+
+        <div class="row">
+        <div class="col s12">
+          <div class="card hoverable white shoppingcartCard">
+            <div class="card-content ">
+              <span class="card-title"><a class="btn-floating waves-effect waves-light blue"><i class="iconPadding material-icons">shopping_cart</i></a> Panier</span><br>
+              <span class="empty-cart">Votre panier est vide</span>
+              <ul class="ticketsList">
+              </ul>
+              <p class="totalPrice"></p>
+            </div>
+            <div class="card-action">
+              <div class="entireFormSubmit col s6 center-align">
+
+                <button class="btn-floating btn-large waves-effect waves-light green paymentSubmit tooltipped" data-delay="50" data-tooltip="Procéder au paiement" type="submit" ><i class="material-icons right">payment</i></button>
+
+              </div>
+
+                {{ form_widget(form.key, { 'attr':  {
+                          'value' : key
+                        }}) }}
+
+            {{ form_end(form) }} 
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    </section>
+
+    <div class="userEmail" email="{{ user.email }}"></div>
+
+{% endblock %}
+
+{% block footer_content %}
+  
+  
+
+{% endblock %}
+
+{% block js %}
+  
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <script type="text/javascript" src="{{ asset('js/ticketpage.js')}}"></script>
+
+{% endblock %}
+

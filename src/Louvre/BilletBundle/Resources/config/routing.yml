@@ -1,0 +1,31 @@
+louvre_billet_homepage:
+    path:     /
+    defaults: { _controller: LouvreBilletBundle:Homepage:index }
+
+louvre_billet_ticketpage:
+    path:    /tickets
+    defaults: { _controller: LouvreBilletBundle:Ticketpage:getPage }
+
+ajax_getFullDays:
+    path:    /tickets/getFullDays
+    defaults: { _controller: LouvreBilletBundle:Ticketpage:getFullDays }
+    methods: [get]
+
+ajax_getRemainingTickets:
+    path:    /tickets/getRemainingTickets
+    defaults: { _controller: LouvreBilletBundle:Ticketpage:getRemainingTickets }
+    methods: [post]
+
+ajax_proceedPayment:
+    path:    /tickets/proceedPayment
+    defaults: { _controller: LouvreBilletBundle:Ticketpage:proceedPayment }
+    methods: [post]
+
+ajax_calendarPartSubmit:
+    path:    /tickets/calendarPartSubmit
+    defaults: { _controller: LouvreBilletBundle:Ticketpage:calendarPartSubmit }
+    methods: [post]
+
+louvre_billet_billpage:
+    path:    /confirmation
+    defaults: { _controller: LouvreBilletBundle:Billpage:getPage }
