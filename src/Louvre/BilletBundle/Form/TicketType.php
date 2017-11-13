@@ -1,6 +1,6 @@
 <?php 
 
-namespace Louvre\BilletBundle\Forms;
+namespace Louvre\BilletBundle\Form;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

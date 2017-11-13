@@ -29,3 +29,4 @@ ajax_calendarPartSubmit:
 louvre_billet_billpage:
     path:    /confirmation
     defaults: { _controller: LouvreBilletBundle:Billpage:getPage }
+    

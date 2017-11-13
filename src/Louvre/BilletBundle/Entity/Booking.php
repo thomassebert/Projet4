@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Louvre\BilletBundle\Entity\ShoppingCart;
+use Louvre\BilletBundle\Entity\Calendar;
+
 /**
  * Booking
  *
@@ -117,7 +120,7 @@ class Booking
      *
      * @return booking
      */
-    public function setShoppingCartId($shoppingCartId)
+    public function setShoppingCartId(ShoppingCart $shoppingCartId)
     {
         $this->shoppingCartId = $shoppingCartId;
 
@@ -261,7 +264,7 @@ class Booking
      *
      * @return booking
      */
-    public function setCalendarId($calendarId)
+    public function setCalendarId(Calendar $calendarId)
     {
         $this->calendarId = $calendarId;
         $this->setBookingType($calendarId->getBookingType());

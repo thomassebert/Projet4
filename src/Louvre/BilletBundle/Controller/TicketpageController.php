@@ -11,7 +11,7 @@ use Louvre\BilletBundle\Entity\User;
 use Louvre\BilletBundle\Entity\Booking;
 use Louvre\BilletBundle\Entity\ShoppingCart;
 use Louvre\BilletBundle\Entity\Calendar;
-use Louvre\BilletBundle\Forms\BookingType;
+use Louvre\BilletBundle\Form\BookingType;
 
 class TicketpageController extends Controller
 {
@@ -120,7 +120,7 @@ class TicketpageController extends Controller
 
 
 
-    public function getSessionUser($repositoryUser, SessionInterface $session) 
+    private function getSessionUser($repositoryUser, SessionInterface $session) 
     {
         $userId = $session->get('user_id');
         $em = $this->getDoctrine()->getManager();
@@ -134,7 +134,7 @@ class TicketpageController extends Controller
 
 
 
-    public function createShoppingCart($user, $em)
+    private function createShoppingCart($user, $em)
     {
         $shoppingCart = new ShoppingCart();
         $shoppingCart->newShoppingCart($user);
@@ -149,7 +149,7 @@ class TicketpageController extends Controller
 
 
 
-    public function getPrice($bookingType, $birthdate, $discountTicket)
+    private function getPrice($bookingType, $birthdate, $discountTicket)
     {
         $today = new \Datetime();
         $age = $today->format('Y') - $birthdate->format('Y');

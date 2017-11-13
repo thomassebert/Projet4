@@ -43,9 +43,9 @@ doctrine:
     dbal:
         driver: pdo_mysql
         host: 'localhost'
-        dbname: 'thomass1_louvre'
-        user: 'thomass1_admin'
-        password: 'oYq-9eu-zxv-kAu'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
         charset: UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
@@ -62,8 +62,8 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: sendmail
-    username: billetterie@louvre.thomassebert.com
-    password: hvG-TWB-h23-G6v
+    username: '%mailer_user%'
+    password: '%mailer_password%'
 
 knp_snappy:
     pdf:

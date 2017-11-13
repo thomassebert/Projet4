@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Louvre\BilletBundle\Entity\User;
-use Louvre\BilletBundle\Forms\UserType;
+use Louvre\BilletBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Cookie;
 
 class HomepageController extends Controller

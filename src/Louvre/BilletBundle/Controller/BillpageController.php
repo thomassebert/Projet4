@@ -11,7 +11,7 @@ use Louvre\BilletBundle\Entity\User;
 use Louvre\BilletBundle\Entity\Booking;
 use Louvre\BilletBundle\Entity\ShoppingCart;
 use Louvre\BilletBundle\Entity\Calendar;
-use Louvre\BilletBundle\Forms\BookingType;
+use Louvre\BilletBundle\Form\BookingType;
 
 class BillpageController extends Controller
 {

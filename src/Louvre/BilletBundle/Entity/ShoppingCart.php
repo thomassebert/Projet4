@@ -8,6 +8,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Louvre\BilletBundle\Entity\User;
+
 /**
  * ShoppingCart
  *
@@ -112,7 +114,7 @@ class ShoppingCart
      *
      * @return ShoppingCart
      */
-    public function setUserId($userId)
+    public function setUserId(User $userId)
     {
         $this->userId = $userId;
 
@@ -225,7 +227,7 @@ class ShoppingCart
         return $this->bookings;
     }
 
-    public function newShoppingCart($userId) 
+    public function newShoppingCart(User $userId) 
     {
         $this->setBookingPrice(0);
         $this->setUserId($userId);
