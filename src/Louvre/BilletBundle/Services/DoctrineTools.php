@@ -3,12 +3,17 @@
 
 namespace Louvre\BilletBundle\Services;
 
+use Louvre\BilletBundle\Entity\User;
+use Louvre\BilletBundle\Entity\Booking;
+use Louvre\BilletBundle\Entity\ShoppingCart;
+use Louvre\BilletBundle\Entity\Calendar;
+
 class DoctrineTools
 {
 
   private $doctrine;
     
-  public function __construct(Doctrine\ORM $doctrine) { //Son constructeur avec l'entity manager en paramètre
+  public function __construct($doctrine) { //Son constructeur avec l'entity manager en paramètre
       $this->doctrine = $doctrine;
   }
 
@@ -23,4 +28,4 @@ class DoctrineTools
 
   return $doctrineTools;
   }
-}
+} 
