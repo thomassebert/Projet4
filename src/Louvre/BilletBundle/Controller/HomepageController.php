@@ -15,7 +15,6 @@ class HomepageController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
     	$repository = $em->getRepository(User::class);
-
     	$user = new User();
 
     	if($request->cookies->has('user'))

@@ -1,10 +1,12 @@
 louvre_billet_homepage:
     path:     /
     defaults: { _controller: LouvreBilletBundle:Homepage:index }
+    methods: [post]
 
 louvre_billet_ticketpage:
     path:    /tickets
     defaults: { _controller: LouvreBilletBundle:Ticketpage:getPage }
+    methods: [post]
 
 ajax_getFullDays:
     path:    /tickets/getFullDays
@@ -29,4 +31,5 @@ ajax_calendarPartSubmit:
 louvre_billet_billpage:
     path:    /confirmation
     defaults: { _controller: LouvreBilletBundle:Billpage:getPage }
+    methods: [post]
     
