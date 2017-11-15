@@ -36,71 +36,57 @@
     <body>
         
         <header id="header">
-
             <div class="logoBar mainColor center-align">
                 <img class="mainLogo" src="{{asset('assets/images/logo.png')}}" alt="Logo du musée">
             </div>
-
-            {% block header %}  {% endblock %}
-
-        </header>
-
-        <main>
-            
-            {% block main_content %}
-
-            
+            {% block header %}  
 
             {% endblock %}
+        </header>
 
+        <main> 
+            {% block main_content %} 
+
+            {% endblock %}
         </main>
 
-        <footer class="mainColor">
-            
+        <footer class="mainColor"> 
             <div class="footer container row">
                 <div class="about col s12 white-text">
-                    <div class="col s12 m6">
-                    <br>
-                    <strong>HORAIRES:</strong> <br>
-                    9h-18h tous les jours sauf le mardi <br>
-                    Nocturne jusqu'à 21h45 les mercredi et vendredi
- 
+                    <div class="col s12 m6 mt15">
+                        <strong>HORAIRES:</strong> <br>
+                        9h-18h tous les jours sauf le mardi <br>
+                        Nocturne jusqu'à 21h45 les mercredi et vendredi
                     </div>
-                    <div class="col s12 m6">
-                    <br>
-                    <strong>ACCÈS:</strong> <br>
-                    Par la Pyramide et la galerie du Carrousel tous les jours <br>
-                    Passage Richelieu de 9h à 17h30 et jusqu’à 18h00 les mercredi et vendredi <br>
-                    Porte des Lions, réservé aux visiteurs en groupe <br>
-                    
+                    <div class="col s12 m6 mt15">
+                        <strong>ACCÈS:</strong> <br>
+                        Par la Pyramide et la galerie du Carrousel tous les jours <br>
+                        Passage Richelieu de 9h à 17h30 et jusqu’à 18h00 les mercredi et vendredi <br>
+                        Porte des Lions, réservé aux visiteurs en groupe <br>
                     </div>
                 </div>
     
-                <div class="museumMap col s12">
-                    
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.8739172815503!2d2.335455315837371!3d48.86061460850382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671d877937b0f%3A0xb975fcfa192f84d4!2sMus%C3%A9e+du+Louvre!5e0!3m2!1sfr!2sfr!4v1506973866302" width="100%" height="150px" frameborder="0" style="border:0" allowfullscreen></iframe>  
-
+                <div class="museumMap col s12">  
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.8739172815503!2d2.335455315837371!3d48.86061460850382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671d877937b0f%3A0xb975fcfa192f84d4!2sMus%C3%A9e+du+Louvre!5e0!3m2!1sfr!2sfr!4v1506973866302" width="100%" height="150px" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
 
                 <div class="socialIcons col s12 center-align">
                     <img src="{{ asset('assets/images/facebook.png')}}" width="50px" alt="facebook icon">
                     <img src="{{ asset('assets/images/twitter.png')}}" width="50px" alt="twitter icon">
                     <img src="{{ asset('assets/images/google.png')}}" width="50px" alt="google plus icon">
-                </div>
-                      
-                
+                </div>        
             </div>
+            {% block footer_content %}
 
-            {% block footer_content %}{% endblock %}
-
+            {% endblock %}
          </footer>
 
-        <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-        {% block js %}{% endblock %}
+        {% block js %}
 
+        {% endblock %}
      </body>
-
  </html> 
 
  

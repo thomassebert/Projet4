@@ -38,7 +38,7 @@ class Calendar
      */
     private $bookings;
 
-     private $bookingType;
+    private $bookingType;
 
 
     /**

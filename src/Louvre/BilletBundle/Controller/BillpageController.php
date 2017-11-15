@@ -7,28 +7,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use Louvre\BilletBundle\Entity\User;
 use Louvre\BilletBundle\Entity\Booking;
 use Louvre\BilletBundle\Entity\ShoppingCart;
 use Louvre\BilletBundle\Entity\Calendar;
+
 use Louvre\BilletBundle\Form\BookingType;
 
 class BillpageController extends Controller
 {
     public function getPageAction(Request $request, SessionInterface $session)
     {
-    	$em = $this->getDoctrine()->getManager();
+    	$dt = $this->get('doctrine_tools');
 
     	if(!is_null($session->get('user_id'))) 
     	{
     		if(!is_null($session->get('shopping_cart'))) 
     		{
-    			$shoppingCart =  unserialize($_COOKIE['shoppingCart']);
+    			$shoppingCart =  unserialize($session->get('shopping_cart'));
     			
     			$session->remove('user_id');
 		    	$session->remove('shopping_cart');
 		    	
-		    	$bookings = $em->getRepository(Booking::class)->findByShoppingCartId($shoppingCart->getId());
+		    	$bookings = $dt->getB()->findByShoppingCartId($shoppingCart->getId());
 
     			$html = $this->renderView('LouvreBilletBundle:Emails:bodyPdf.html.twig', array(
     				'datas' => $shoppingCart,

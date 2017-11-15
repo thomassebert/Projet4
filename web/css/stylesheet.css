@@ -7,6 +7,10 @@ body {
     padding: 0;
   }
 
+.mt15 {
+	margin-top: 15px;
+}
+
 main {
     flex: 1 0 auto;
   }
@@ -32,8 +36,6 @@ main {
 .mainColor {
 	background-color: rgb(60, 60, 60);
 }
-
-/* FOOTER */
 
 footer {
 	padding-top: 20px;

@@ -3,23 +3,25 @@
 namespace Louvre\BilletBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use Louvre\BilletBundle\Entity\User;
 use Louvre\BilletBundle\Form\UserType;
-use Symfony\Component\HttpFoundation\Cookie;
 
 class HomepageController extends Controller
 {
     public function indexAction(Request $request, SessionInterface $session)
     {
-    	$em = $this->getDoctrine()->getManager();
-    	$repository = $em->getRepository(User::class);
+    	$dt = $this->get('doctrine_tools');
     	$user = new User();
 
     	if($request->cookies->has('user'))
         {
-        	$searchForUser = $repository->find($request->cookies->get('user'));
+        	$searchForUser = $dt->getU()->find($request->cookies->get('user'));
 
 	        if($searchForUser)
 	        {
@@ -39,13 +41,12 @@ class HomepageController extends Controller
 	    	// On récupère son ID pour le passer à la vue suivante
         	$user = $userType->getData();
 
-        	$repository = $em->getRepository(User::class);
-        	$searchForUser = $repository->findOneByEmail($user->getEmail());
+        	$searchForUser = $dt->getU()->findOneByEmail($user->getEmail());
 
         	if(!$searchForUser)
         	{
-        		$em->persist($user);
-        		$em->flush();
+        		$dt->persist($user);
+        		$dt->flush();
 
         		$userId = $user->getId();	
         	}
@@ -53,13 +54,17 @@ class HomepageController extends Controller
         	{
         		$searchForUser->setFullname($user->getFullname());
         		$searchForUser->setAge($user->getAge());
-        		$em->flush();
+        		$dt->flush();
 
         		$userId = $searchForUser->getId();
         	}
 
         	// Création d'un cookie afin de retrouver les infos de l'utilisateur lors de sa prochaine visite et ouverture d'une session
         	$session->set('user_id', $userId);
+
+            $response = new Response();
+            $cookie = new Cookie('user', $userId);
+            $response->headers->setCookie($cookie);
         	
 
 

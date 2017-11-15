@@ -3,36 +3,30 @@
 namespace Louvre\BilletBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use Louvre\BilletBundle\Entity\User;
 use Louvre\BilletBundle\Entity\Booking;
 use Louvre\BilletBundle\Entity\ShoppingCart;
 use Louvre\BilletBundle\Entity\Calendar;
+
 use Louvre\BilletBundle\Form\BookingType;
 
 class TicketpageController extends Controller
 {
-
-
     public function getPageAction(Request $request, SessionInterface $session)
     {
         if(!is_null($session->get('user_id')))
         {
-            // SERVICES
-            // 
-            $em = $this->getDoctrine()->getManager();
-            $repositoryUser = $em->getRepository(User::class);
-            $repositoryCalendar = $em->getRepository(Calendar::class);
-            $repositoryShoppingCart = $em->getRepository(ShoppingCart::class);
-
-            $doctrine = array('user' => $repositoryUser, 'calendar' => $repositoryCalendar, 'shoppingCart' => $repositoryShoppingCart);
+            $dt = $this->get('doctrine_tools');
 
             // RECUPERE L'UTILISATEUR
             // 
-            $user = $this->getSessionUser($doctrine['user'], $session);
+            $user = $this->getSessionUser($dt->getU(), $session, $dt);
 
             // CREATION DU FORMULAIRE BOOKING
             // 
@@ -49,7 +43,7 @@ class TicketpageController extends Controller
 
                 // RECUPERE L'OBJET CALENDAR A PARTIR DE LA DATE CHOISIE
                 // 
-                $calendar = $doctrine['calendar']->findOneByDay($datas['calendar']->getDay());
+                $calendar = $dt->getC()->findOneByDay($datas['calendar']->getDay());
                 if(is_null($calendar))
                 {
                     $calendar = new Calendar();
@@ -64,7 +58,7 @@ class TicketpageController extends Controller
 
                 // RECUPERE L'OBJET SHOPPINGCART A PARTIR DE LA CLE DE RESERVATION
                 // 
-                $shoppingCart = $doctrine['shoppingCart']->findOneByBookingKey($datas['key']);
+                $shoppingCart = $dt->getSc()->findOneByBookingKey($datas['key']);
 
                 // POUR CHAQUE TICKET,
                 // 
@@ -81,7 +75,7 @@ class TicketpageController extends Controller
                     // 
                     $shoppingCart->setBookingPrice($data->getTicketPrice());
                     
-                    $em->persist($data);
+                    $dt->persist($data);
                 }
 
                 // ON MET A JOUR L'ETAT DU PANIER AINSI QUE SA DATE
@@ -91,9 +85,9 @@ class TicketpageController extends Controller
 
                 // ON ENREGISTRE EN BDD LE PANIER, LES TICKETS, LE CALENDRIER
                 // 
-                $em->persist($calendar);
-                $em->persist($shoppingCart);
-                $em->flush();
+                $dt->persist($calendar);
+                $dt->persist($shoppingCart);
+                $dt->flush();
 
                 $session->set('shopping_cart', serialize($shoppingCart));
 
@@ -102,7 +96,7 @@ class TicketpageController extends Controller
 
             // SINON, ON CREE UN NOUVEAU PANIER
             // 
-            $shoppingCart = $this->createShoppingCart($user, $em);
+            $shoppingCart = $this->createShoppingCart($user, $dt);
 
         	return $this->render('LouvreBilletBundle:Ticketpage:ticketpage.html.twig', array(
         	'form' => $form->createView(),
@@ -120,13 +114,10 @@ class TicketpageController extends Controller
 
 
 
-    private function getSessionUser($repositoryUser, SessionInterface $session) 
+    private function getSessionUser($repositoryUser, SessionInterface $session, $dt) 
     {
         $userId = $session->get('user_id');
-        $em = $this->getDoctrine()->getManager();
-        $repositoryUser = $em->getRepository(User::class);
-            
-        $user = $repositoryUser->findOneById($userId);
+        $user = $dt->getU()->findOneById($userId);
 
         return $user;
     }
@@ -134,14 +125,14 @@ class TicketpageController extends Controller
 
 
 
-    private function createShoppingCart($user, $em)
+    private function createShoppingCart($user, $dt)
     {
         $shoppingCart = new ShoppingCart();
         $shoppingCart->newShoppingCart($user);
         $shoppingCart->setBookingDate(new \Datetime());
 
-        $em->persist($shoppingCart);
-        $em->flush();
+        $dt->persist($shoppingCart);
+        $dt->flush();
 
         return $shoppingCart;
     }
@@ -193,13 +184,8 @@ class TicketpageController extends Controller
         {
             $dates = array();
             $em = $this->getDoctrine()->getManager();
-            $repositoryUser = $em->getRepository(User::class);
-            $repositoryCalendar = $em->getRepository(Calendar::class);
-            $repositoryShoppingCart = $em->getRepository(ShoppingCart::class);
 
-            $doctrine = array('user' => $repositoryUser, 'calendar' => $repositoryCalendar, 'shoppingCart' => $repositoryShoppingCart);
-
-            $searchForFullDays = $doctrine['calendar']->findByBookings('1000');
+            $searchForFullDays = $em->getRepository(Calendar::class)->findByBookings('1000');
 
             foreach ($searchForFullDays as $day) 
             {
@@ -224,13 +210,8 @@ class TicketpageController extends Controller
             $date = json_decode($request->getContent(), true);
             $day = \DateTime::createFromFormat('d-m-Y', $date);
             $em = $this->getDoctrine()->getManager();
-            $repositoryUser = $em->getRepository(User::class);
-            $repositoryCalendar = $em->getRepository(Calendar::class);
-            $repositoryShoppingCart = $em->getRepository(ShoppingCart::class);
 
-            $doctrine = array('user' => $repositoryUser, 'calendar' => $repositoryCalendar, 'shoppingCart' => $repositoryShoppingCart);
-
-            $searchForDay = $doctrine['calendar']->findOneByDay($day);
+            $searchForDay = $em->getRepository(Calendar::class)->findOneByDay($day);
 
             if(!$searchForDay)
             {

@@ -43,9 +43,6 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="booking_type", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(
-     *     message = "Le champ ne peut pas être vide."
-     * )
      */
     private $bookingType;
 
