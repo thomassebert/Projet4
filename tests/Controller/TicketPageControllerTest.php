@@ -13,7 +13,7 @@ class TicketPageControllerTest extends WebTestCase
         $client = self::createClient();
 
         $session = $client->getContainer()->get('session');
-        $session->set('user_id', 13);
+        $session->set('user', 12);
         $session->save();
 
         $client->request('GET', '/tickets');

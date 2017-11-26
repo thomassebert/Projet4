@@ -2,7 +2,7 @@
 
 namespace tests\Form;
 
-use Louvre\BilletBundle\Forms\UserType;
+use Louvre\BilletBundle\Form\UserType;
 use Louvre\BilletBundle\Entity\User;
 use Symfony\Component\Form\Test\TypeTestCase;
 

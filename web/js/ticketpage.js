@@ -404,6 +404,9 @@ function ticketFormsStateListener() {
 				{
 					price = 10;
 				}
+				if( $('.bookingType input').val() == 'Demi-journée') {
+					price = price / 2;
+				}
 				$(this).find('.ticketPrice').html(' - ' + price + '€');
 				$('#'+(i+1)).find('.priceTicket').html(price);
 				totalPrice += price;
@@ -454,7 +457,7 @@ function proceedPayment($token) {
 	$.ajax({
 				url: "http://louvre.thomassebert.com/tickets/proceedPayment",
 				method: "post",
-				data: JSON.stringify($token)
+				data: JSON.stringify([$token, totalPrice*100])
 			}).done(function(msg){
 				if(msg['state'])
 				{
@@ -511,7 +514,7 @@ $(document).ready(function () {
 	    zipCode: true,
 	    billingAddress: true,
 	    currency: 'EUR',
-	    allowRememberMe: false
+	    allowRememberMe: true
 	  });
 	  
 	});

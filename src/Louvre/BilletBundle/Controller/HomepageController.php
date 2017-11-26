@@ -60,7 +60,7 @@ class HomepageController extends Controller
         	}
 
         	// Création d'un cookie afin de retrouver les infos de l'utilisateur lors de sa prochaine visite et ouverture d'une session
-        	$session->set('user_id', $userId);
+        	$session->set('user', $userId);
 
             $response = new Response();
             $cookie = new Cookie('user', $userId);

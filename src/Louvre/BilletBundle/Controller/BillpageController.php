@@ -21,7 +21,7 @@ class BillpageController extends Controller
     {
     	$dt = $this->get('doctrine_tools');
 
-    	if(!is_null($session->get('user_id'))) 
+    	if(!is_null($session->get('user'))) 
     	{
     		if(!is_null($session->get('shopping_cart'))) 
     		{
@@ -68,7 +68,7 @@ class BillpageController extends Controller
 		        $message = (new \Swift_Message('Musée du Louvre'))
 		        	->setContentType("text/html")
                     ->setSubject('Confirmation de commande')
-			        ->setFrom('billetterie@louvre.thomassebert.fr')
+			        ->setFrom('billetterie@louvre.thomassebert.com')
 			        ->setTo($shoppingCart->getUserId()->getEmail())
 			        ->setBody(
 			            $this->renderView(

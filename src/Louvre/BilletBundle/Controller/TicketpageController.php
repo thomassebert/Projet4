@@ -20,7 +20,7 @@ class TicketpageController extends Controller
 {
     public function getPageAction(Request $request, SessionInterface $session)
     {
-        if(!is_null($session->get('user_id')))
+        if(!is_null($session->get('user')))
         {
             $dt = $this->get('doctrine_tools');
 
@@ -116,7 +116,7 @@ class TicketpageController extends Controller
 
     private function getSessionUser($repositoryUser, SessionInterface $session, $dt) 
     {
-        $userId = $session->get('user_id');
+        $userId = $session->get('user');
         $user = $dt->getU()->findOneById($userId);
 
         return $user;
@@ -291,7 +291,26 @@ class TicketpageController extends Controller
     {
         if($request->isXMLHttpRequest())
         {
-            $token = json_decode($request->getContent(), true);
+            $datas = json_decode($request->getContent(), true);
+            $token = $datas[0];
+            $amount = $datas[1];
+
+            // Set your secret key: remember to change this to your live secret key in production
+            // See your keys here: https://dashboard.stripe.com/account/apikeys
+            \Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+
+            // Token is created using Checkout or Elements!
+            // Get the payment token ID submitted by the form:
+            $token = $token;
+
+            // Charge the user's card:
+            $charge = \Stripe\Charge::create(array(
+              "amount" => $amount,
+              "currency" => "EUR",
+              "description" => "Achat de billets - Musée du Louvre",
+              "source" => $token,
+            ));
+
             $state = true;
             
             return new JsonResponse(array('state'=>$state));
